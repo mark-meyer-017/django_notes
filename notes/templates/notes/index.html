@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block sidebar %}
+
+            {% include 'include_templates/_sidebar.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+            {% for item in notes %}
+                <div class="card mb-3 card border-info">
+                    <div class="card-header text-white bg-dark">
+                        Категория: <a href="{{ item.category.get_absolute_url }}" class="text-info">{{ item.category }}</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="media">
+                            {# условие,если в строке таблицы нет фото - вставляет заглушку #}
+                            {% if item.note_photo %}
+                                <img src="{{ item.note_photo.url }}" alt=""
+                                     width="200" height="200" class="mr-3">
+                            {% else %}
+                                <img src="https://pbs.twimg.com/media/DotX76qX4AAPR6O.png"
+                                     alt="" width="200" height="200"
+                                     class="mr-3">
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="card-title">{{ item.note_title }}</h5>
+                                {# linebreaks - добавляет в отображаемый текст разделители и параграфы, #}
+                                {# truncatwords:40 - ограничивает показ текста 40 словами #}
+                                <p class="card-text">{{ item.note_content|linebreaks|truncatewords:40 }}</p>
+                                <a href="{{ item.get_absolute_url }}" class="btn btn-secondary">Открыть
+                                    заметку</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ item.created_at }}
+                    </div>
+                </div>
+            {% endfor %}
+
+{% endblock %}

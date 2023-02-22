@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ one_note.note_title }}
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'include_templates/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3 card border-info">
+                    <div class="card-header text-white bg-dark">
+                        Категория: <a href="{{ one_note.category.get_absolute_url }}" class="text-info">{{ one_note.category }}</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="media">
+                            {# условие,если в строке таблицы нет фото - вставляет заглушку #}
+                            {% if one_note.note_photo %}
+                                <img src="{{ one_note.note_photo.url }}" alt=""
+                                     width="200" height="200" class="mr-3">
+                            {% else %}
+                                <img src="https://pbs.twimg.com/media/DotX76qX4AAPR6O.png"
+                                     alt="" width="200" height="200"
+                                     class="mr-3">
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="card-title">{{ one_note.note_title }}</h5>
+                                {# linebreaks - добавляет в отображаемый текст разделители и параграфы, #}
+                                {# truncatwords:40 - ограничивает показ текста 40 словами #}
+                                <p class="card-text">{{ one_note.note_content|linebreaks }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ one_note.created_at }}
+                    </div>
+                </div>
+{% endblock %}

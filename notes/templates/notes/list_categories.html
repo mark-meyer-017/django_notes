@@ -1,0 +1,16 @@
+<div class="list-group">
+    {# цикл проходит по списку категорий #}
+    {% for item in categories %}
+        <a href="{{ item.get_absolute_url }}"
+           class="list-group-item list-group-item-action text-center  border-info">
+            {% if item.photo %}
+                <img src="{{ item.photo.url }}" alt="" width="50"
+                     height="50">
+            {% else %}
+                <img src="https://pbs.twimg.com/media/DotX76qX4AAPR6O.png"
+                     alt="" width="50" height="50"
+                     class="mr-3">
+            {% endif %}
+            {{ item.title }}</a>
+    {% endfor %}
+</div>

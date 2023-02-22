@@ -1,0 +1,17 @@
+{% load notes_tags %}
+
+{# использование simple tag #}
+{#<div class="list-group">#}
+{#    {% get_list_categories as categories %}#}
+    {# цикл проходит по списку категорий #}
+{#    {% for item in categories %}#}
+{#        <a href="{% url 'category' item.pk %}"#}
+{#           class="list-group-item list-group-item-action text-center  border-info">#}
+{#            <img src="{{ item.photo.url }}" alt="" width="50"#}
+{#                 height="50">#}
+{#            {{ item.title }}</a>#}
+{#    {% endfor %}#}
+{#</div>#}
+
+{# использование include tag #}
+{% show_categories %}

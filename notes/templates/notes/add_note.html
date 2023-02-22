@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Добавление заметки : {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'include_templates/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+   <h1>Добавление заметки</h1>
+
+    <form action="{% url 'add_note' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-info btn-block">Добавить заметку</button>
+    </form>
+{% endblock %}
